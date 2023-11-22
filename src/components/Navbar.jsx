@@ -40,7 +40,7 @@ const Navbar = () => {
           }}
         >
           <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
-          <p className="text-beige text-[18px] font-bold cursor-pointer">
+          <p className="text-[#6A7AA0] text-[18px] font-bold cursor-pointer">
             Schuyler Klaassen
           </p>
         </Link>
