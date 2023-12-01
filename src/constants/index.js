@@ -4,6 +4,7 @@ import {
     creator,
     web,
     javascript,
+    angular,
     typescript,
     html,
     css,
@@ -13,7 +14,7 @@ import {
     nodejs,
     mongodb,
     git,
-    figma,
+    sketch,
     docker,
     meta,
     starbucks,
@@ -73,16 +74,16 @@ import {
       icon: javascript,
     },
     {
+      name: "Angular",
+      icon: angular,
+    },
+    {
       name: "TypeScript",
       icon: typescript,
     },
     {
       name: "React JS",
       icon: reactjs,
-    },
-    {
-      name: "Redux Toolkit",
-      icon: redux,
     },
     {
       name: "Tailwind CSS",
@@ -105,8 +106,8 @@ import {
       icon: git,
     },
     {
-      name: "figma",
-      icon: figma,
+      name: "Sketch",
+      icon: sketch,
     },
     {
       name: "docker",
