@@ -1,5 +1,5 @@
-import React, { Suspense, useEffect, useState } from "react";
-import { Canvas, useThree } from "@react-three/fiber";
+import { Suspense, useEffect, useState } from "react";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
 import CanvasLoader from "../Loader";
@@ -16,7 +16,7 @@ const Computers = ({ isMobile }) => {
         castShadow
         shadow-mapSize={1024}
       />
-      <hemisphereLight intensity={0.45} groundColor="black" />
+      <hemisphereLight intensity={0.05} groundColor="black" />
       <pointLight />
       <primitive
         object={computer.scene}
