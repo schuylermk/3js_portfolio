@@ -9,7 +9,6 @@ import {
     html,
     css,
     reactjs,
-    redux,
     tailwind,
     nodejs,
     mongodb,
