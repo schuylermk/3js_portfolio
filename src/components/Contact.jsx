@@ -19,7 +19,7 @@ const Contact = () => {
 
   const handleChange = (e) => {
     const { target } = e;
-    const { name, value } = target;
+    const { name, value } = e.target;
 
     setForm({
       ...form,
@@ -33,8 +33,8 @@ const Contact = () => {
 
     emailjs
       .send(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+        "service_0gjjl6a",
+        "template_4xw9z6u",
         {
           from_name: form.name,
           to_name: "Portfolio Email",
@@ -42,13 +42,13 @@ const Contact = () => {
           to_email: "schuyler.m.k@gmail.com",
           message: form.message,
         },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
+        "DbtcdlaYZ-MSDAQOg"
       )
       .then(
         () => {
           setLoading(false);
           alert(
-            "Thanks for the message! I'll get back to you as soon as i can!"
+            "Thanks for the message! I'll get back to you as soon as I can!"
           );
 
           setForm({
@@ -58,6 +58,8 @@ const Contact = () => {
           });
         },
         (error) => {
+          setLoading(false);
+
           console.error(error);
 
           alert("Hmmmm, something went wrong. Please try again.");
@@ -74,7 +76,7 @@ const Contact = () => {
         className="flex-[0.75] bg-black-100 p-8 rounded-2xl"
       >
         <p className={styles.sectionSubText}>Get in touch</p>
-        <h3 className={styles.sectionHeadText}>Contact.</h3>
+        <h3 className={styles.sectionHeadText}>Contact me.</h3>
 
         <form
           ref={formRef}
@@ -82,35 +84,35 @@ const Contact = () => {
           className="mt-12 flex flex-col gap-8"
         >
           <label className="flex flex-col">
-            <span className="text-white font-medium mb-4"></span>
+            <span className="text-white font-medium mb-4">Name</span>
             <input
               type="text"
               name="name"
               value={form.name}
               onChange={handleChange}
-              placeholder="Your name"
+              placeholder="What's your name?"
               className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
             />
           </label>
           <label className="flex flex-col">
-            <span className="text-white font-medium mb-4"></span>
+            <span className="text-white font-medium mb-4">Email Address</span>
             <input
               type="email"
               name="email"
               value={form.email}
               onChange={handleChange}
-              placeholder="Your email"
+              placeholder="What's the best email to reach you?"
               className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
             />
           </label>
           <label className="flex flex-col">
-            <span className="text-white font-medium mb-4"></span>
+            <span className="text-white font-medium mb-4">Message</span>
             <textarea
-              rows="{7}"
+              rows="7"
               name="message"
               value={form.message}
               onChange={handleChange}
-              placeholder="What's up?"
+              placeholder="What's up? How can I help?"
               className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
             />
           </label>
