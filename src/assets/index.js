@@ -24,8 +24,10 @@ import threejs from "./tech/threejs.png";
 
 import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
-import starbucks from "./company/starbucks.png";
-import tesla from "./company/tesla.png";
+import bluevolt from "./company/bluevolt_logo.png";
+import philips from "./company/philipsnl.png";
+import jams from "./company/jams.png";
+import omni from "./company/omni.png";
 
 import carrent from "./carrent.png";
 import jobit from "./jobit.png";
@@ -56,8 +58,10 @@ export {
   threejs,
   meta,
   shopify,
-  starbucks,
-  tesla,
+  bluevolt,
+  philips,
+  jams,
+  omni,
   carrent,
   jobit,
   tripguide,

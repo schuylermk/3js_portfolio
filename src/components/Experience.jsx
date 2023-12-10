@@ -26,7 +26,9 @@ const ExperienceCard = ({ experience }) => {
           <img
             src={experience.icon}
             alt={experience.company_name}
-            className="w-[60%] h-[60%] object-contain"
+            className={`w-[95%] h-[65%] object-contain ${
+              experience.iconMarginTop ? "mt-[2px]" : ""
+            }`}
           />
         </div>
       }
@@ -45,7 +47,7 @@ const ExperienceCard = ({ experience }) => {
         {experience.points.map((point, index) => (
           <li
             key={`experience-point-${index}`}
-            className="text-white-100 text-[14px] pl-1 tracking-wider"
+            className="text-white-100 text-[14px] pl-1"
           >
             {point}
           </li>
