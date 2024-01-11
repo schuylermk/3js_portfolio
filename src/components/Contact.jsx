@@ -42,13 +42,13 @@ const Contact = () => {
           to_email: "schuyler.m.k@gmail.com",
           message: form.message,
         },
-        "DbtcdlaYZ-MSDAQOg"
+        "DbtcdlaYZ-MSDAQOg",
       )
       .then(
         () => {
           setLoading(false);
           alert(
-            "Thanks for the message! I'll get back to you as soon as I can!"
+            "Thanks for the message! I'll get back to you as soon as I can!",
           );
 
           setForm({
@@ -63,17 +63,17 @@ const Contact = () => {
           console.error(error);
 
           alert("Hmmmm, something went wrong. Please try again.");
-        }
+        },
       );
   };
 
   return (
     <div
-      className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden`}
+      className={`flex flex-col-reverse gap-10 overflow-hidden xl:mt-12 xl:flex-row`}
     >
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
-        className="flex-[0.75] bg-black-100 p-8 rounded-2xl"
+        className="flex-[0.75] rounded-2xl bg-black-100 p-8"
       >
         <p className={styles.sectionSubText}>Get in touch</p>
         <h3 className={styles.sectionHeadText}>Contact me.</h3>
@@ -84,42 +84,42 @@ const Contact = () => {
           className="mt-12 flex flex-col gap-8"
         >
           <label className="flex flex-col">
-            <span className="text-white font-medium mb-4">Name</span>
+            <span className="mb-4 font-medium text-white">Name</span>
             <input
               type="text"
               name="name"
               value={form.name}
               onChange={handleChange}
               placeholder="What's your name?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
+              className="rounded-lg border-none bg-tertiary px-6 py-4 font-medium text-white outline-none placeholder:text-secondary"
             />
           </label>
           <label className="flex flex-col">
-            <span className="text-white font-medium mb-4">Email Address</span>
+            <span className="mb-4 font-medium text-white">Email Address</span>
             <input
               type="email"
               name="email"
               value={form.email}
               onChange={handleChange}
               placeholder="What's the best email to reach you?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
+              className="rounded-lg border-none bg-tertiary px-6 py-4 font-medium text-white outline-none placeholder:text-secondary"
             />
           </label>
           <label className="flex flex-col">
-            <span className="text-white font-medium mb-4">Message</span>
+            <span className="mb-4 font-medium text-white">Message</span>
             <textarea
               rows="7"
               name="message"
               value={form.message}
               onChange={handleChange}
               placeholder="What's up? How can I help?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
+              className="rounded-lg border-none bg-tertiary px-6 py-4 font-medium text-white outline-none placeholder:text-secondary"
             />
           </label>
 
           <button
             type="submit"
-            className="bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary"
+            className="w-fit rounded-xl bg-tertiary px-8 py-3 font-bold text-white shadow-md shadow-primary outline-none"
           >
             {loading ? "Sending..." : "Send"}
           </button>
@@ -128,7 +128,7 @@ const Contact = () => {
 
       <motion.div
         variants={slideIn("right", "tween", 0.2, 1)}
-        className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]"
+        className="h-[350px] md:h-[550px] xl:h-auto xl:flex-1"
       >
         <EarthCanvas />
       </motion.div>
