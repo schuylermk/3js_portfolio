@@ -47,9 +47,6 @@ const ProjectCard = ({
   live_demo_link,
   source_code_link,
 }) => {
-  // const linkHoverPointer = {
-  //   cursor: "pointer",
-  // };
   return (
     <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
       <Tilt
@@ -67,8 +64,7 @@ const ProjectCard = ({
             className="h-full w-full rounded-2xl object-cover"
           />
           <div className="card-img_hover absolute inset-0 m-3 flex justify-end">
-            <motion.div
-              // whileHover={{ scale: 1.125 }}
+            <div
               onClick={() => window.open(source_code_link, "_blank")}
               className="black-gradient flex h-10 w-10 cursor-pointer items-center justify-center rounded-full"
             >
@@ -77,12 +73,12 @@ const ProjectCard = ({
                 alt="source code"
                 className="h-1/2 w-1/2 object-contain"
               />
-            </motion.div>
+            </div>
           </div>
         </div>
 
         <div>
-          <a href={live_demo_link} cursor-pointer target="_blank">
+          <a href={live_demo_link} className="cursor-pointer" target="_blank">
             <h3 className="text-[24px] font-bold text-white">{name}</h3>
           </a>
           <p className="mt-2 text-[14px] text-secondary">{description}</p>
@@ -103,4 +99,4 @@ const ProjectCard = ({
   );
 };
 
-export default SectionWrapper(Works, "");
+export default SectionWrapper(Works, "projects");
