@@ -8,14 +8,48 @@ import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
 
+const Works = () => {
+  return (
+    <>
+      <motion.div variants={textVariant()}>
+        <p className={`${styles.sectionSubText} `}>My work</p>
+        <h2 className={`${styles.sectionHeadText}`}>Projects.</h2>
+      </motion.div>
+
+      <div className="flex w-full">
+        <motion.p
+          variants={fadeIn("", "", 0.1, 1)}
+          className="mt-3 max-w-6xl text-[17px] leading-[30px] text-secondary"
+        >
+          The following projects showcase my skills with some recent
+          projects/real-world examples of my work. Each project is briefly
+          described with links to github code repositories and live demos. They
+          are an attempt to show my ability to solve complex problems, work with
+          different technologies, and manage projects effectively.
+        </motion.p>
+      </div>
+
+      <div className="mt-20 flex flex-wrap gap-7">
+        {projects.map((project, index) => (
+          <ProjectCard key={`project-${index}`} index={index} {...project} />
+        ))}
+      </div>
+    </>
+  );
+};
+
 const ProjectCard = ({
   index,
   name,
   description,
   tags,
   image,
+  live_demo_link,
   source_code_link,
 }) => {
+  // const linkHoverPointer = {
+  //   cursor: "pointer",
+  // };
   return (
     <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
       <Tilt
@@ -33,7 +67,8 @@ const ProjectCard = ({
             className="h-full w-full rounded-2xl object-cover"
           />
           <div className="card-img_hover absolute inset-0 m-3 flex justify-end">
-            <div
+            <motion.div
+              // whileHover={{ scale: 1.125 }}
               onClick={() => window.open(source_code_link, "_blank")}
               className="black-gradient flex h-10 w-10 cursor-pointer items-center justify-center rounded-full"
             >
@@ -42,12 +77,14 @@ const ProjectCard = ({
                 alt="source code"
                 className="h-1/2 w-1/2 object-contain"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
 
         <div>
-          <h3 className="text-[24px] font-bold text-white">{name}</h3>
+          <a href={live_demo_link} cursor-pointer target="_blank">
+            <h3 className="text-[24px] font-bold text-white">{name}</h3>
+          </a>
           <p className="mt-2 text-[14px] text-secondary">{description}</p>
         </div>
 
@@ -63,36 +100,6 @@ const ProjectCard = ({
         </div>
       </Tilt>
     </motion.div>
-  );
-};
-
-const Works = () => {
-  return (
-    <>
-      <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} `}>My work</p>
-        <h2 className={`${styles.sectionHeadText}`}>Projects.</h2>
-      </motion.div>
-
-      <div className="flex w-full">
-        <motion.p
-          variants={fadeIn("", "", 0.1, 1)}
-          className="mt-3 max-w-3xl text-[17px] leading-[30px] text-secondary"
-        >
-          Following projects showcases my skills and experience through
-          real-world examples of my work. Each project is briefly described with
-          links to code repositories and live demos in it. It reflects my
-          ability to solve complex problems, work with different technologies,
-          and manage projects effectively.
-        </motion.p>
-      </div>
-
-      <div className="mt-20 flex flex-wrap gap-7">
-        {projects.map((project, index) => (
-          <ProjectCard key={`project-${index}`} index={index} {...project} />
-        ))}
-      </div>
-    </>
   );
 };
 

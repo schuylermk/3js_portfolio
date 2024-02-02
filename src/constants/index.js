@@ -22,7 +22,7 @@ import {
   omni,
   portfolio,
   evogym,
-  tripguide,
+  thesaurus,
   threejs,
 } from "../assets";
 
@@ -231,12 +231,13 @@ const projects = [
       },
     ],
     image: portfolio,
+    live_demo_link: "",
     source_code_link: "https://github.com/schuylermk/3js_portfolio",
   },
   {
     name: "EvoGym",
     description:
-      "Sample fitness center website built in React and TypeScript, Next.js, and Tailwind. Desktop and mobile-friendly.",
+      "Sample fitness center website built in React and TypeScript, Next.js, and Tailwind. Hosted by Cloudflare. Desktop and mobile-friendly.",
     tags: [
       {
         name: "react",
@@ -247,17 +248,22 @@ const projects = [
         color: "green-text-gradient",
       },
       {
-        name: "scss",
-        color: "pink-text-gradient",
+        name: "framer-motion",
+        color: "framerblue-text-gradient",
+      },
+      {
+        name: "tailwindcss",
+        color: "framerblue-text-gradient",
       },
     ],
     image: evogym,
+    live_demo_link: "https://bbb24b57.gym-typescript-ct8.pages.dev/",
     source_code_link: "https://github.com/schuylermk/gym-typescript/",
   },
   {
-    name: "Trip Guide",
+    name: "A Quick (and questionable) Thesaurus",
     description:
-      "A comprehensive travel booking platform that allows users to book flights, hotels, and rental cars, and offers curated recommendations for popular destinations.",
+      "Code challenge to use the Datamuse API to give a (somewhat weak) list of synonyms for a word inputted by the user.",
     tags: [
       {
         name: "nextjs",
@@ -272,8 +278,9 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: tripguide,
-    source_code_link: "https://github.com/",
+    image: thesaurus,
+    live_demo_link: "https://schuylermk.github.io/synonyms/",
+    source_code_link: "https://github.com/schuylermk/synonyms",
   },
 ];
 

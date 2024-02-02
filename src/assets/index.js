@@ -32,7 +32,7 @@ import omni from "./company/omni.png";
 
 import portfolio from "./portfolio-landing.png";
 import evogym from "./evogym.png";
-import tripguide from "./tripguide.png";
+import thesaurus from "./thesaurus.png";
 
 export {
   logo,
@@ -66,5 +66,5 @@ export {
   omni,
   portfolio,
   evogym,
-  tripguide,
+  thesaurus,
 };
