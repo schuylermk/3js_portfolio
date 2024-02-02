@@ -42,19 +42,29 @@ const About = () => {
         <p className={styles.sectionSubText}>Introduction</p>
         <h2 className={styles.sectionHeadText}>Overview.</h2>
       </motion.div>
-
       <motion.p
         variants={fadeIn("", "", 0.1, 1)}
-        className="mt-4 max-w-3xl text-[17px] leading-[30px] text-secondary"
+        className="mt-4 max-w-6xl text-[17px] leading-[30px] text-secondary"
       >
-        I'm a skilled software developer with experience in TypeScript and
-        JavaScript, frameworks like Angular, React, Node.js, and Three.js. I'm a
-        quick learner and collaborate closely with clients to create efficient,
-        scalable, and user-friendly solutions that solve real-world problems.
-        Let's work together to bring your ideas to life!
+        I'm a skilled web developer with experience in{" "}
+        <span className="text-slate-100 [word-spacing:4px]">
+          JavaScript and TypeScript
+        </span>
+        , frameworks like{" "}
+        <span className="text-slate-100 [word-spacing:4px]">
+          Angular, React, Node.js, Three.js, etc.
+        </span>
+        , and have always welcomed opportunities to go deeper down the stack –
+        digging into areas of codebases written in{" "}
+        <span className="text-slate-100 [word-spacing:4px]">
+          C#, .NET, SQL, Python
+        </span>
+        , and other languages. I'm a quick and enthusiastic learner who loves
+        collaborating closely with clients, stakeholders, and teammates to
+        create efficient, scalable, and user-friendly solutions that solve
+        real-world problems. Let's work together!
       </motion.p>
-
-      <div className="mt-20 flex flex-wrap gap-10">
+      <div className="mx-auto mt-20 flex max-w-4xl flex-wrap justify-center gap-10">
         {services.map((service, index) => (
           <ServiceCard key={service.title} index={index} {...service} />
         ))}

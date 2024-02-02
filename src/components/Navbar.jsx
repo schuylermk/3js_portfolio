@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 import { styles } from "../styles";
@@ -8,22 +9,6 @@ import { logo, menu, close } from "../assets";
 const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
-  // const [scrolled, setScrolled] = useState(false);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const scrollTop = window.scrollY;
-  //     if (scrollTop > 100) {
-  //       setScrolled(true);
-  //     } else {
-  //       setScrolled(false);
-  //     }
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
 
   return (
     <nav
@@ -32,17 +17,30 @@ const Navbar = () => {
     >
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between">
         <Link
-          to="/"
-          className="flex items-center gap-2"
+          to="/#Contact"
+          className="flex items-center gap-10"
           onClick={() => {
-            setActive("");
-            window.scrollTo(0, 0);
+            window.location.href = "#Contact";
           }}
         >
-          <img src={logo} alt="logo" className="h-9 w-9 object-contain" />
-          <p className="cursor-pointer text-[18px] font-bold text-[#6A7AA0]">
-            Schuyler Klaassen
-          </p>
+          <motion.div
+            whileHover={{
+              rotate: 383,
+              transition: { duration: 0.75, ease: [1, 0, 0, 1] },
+            }}
+          >
+            <img src={logo} alt="logo" className="duration-250 h-32 w-32" />
+          </motion.div>
+          <motion.div
+            whileHover={{
+              scale: 1.05,
+              transition: { duration: 0.3334 },
+            }}
+          >
+            <p className="transition-duration:700ms cursor-pointer text-[18px] font-bold text-[#6A7AA0] transition delay-500 ease-in-out hover:text-beige">
+              Schuyler Klaassen
+            </p>
+          </motion.div>
         </Link>
         <ul className="hidden list-none flex-row gap-10 sm:flex">
           {navLinks.map((link) => (
@@ -52,7 +50,9 @@ const Navbar = () => {
                 active === link.title ? "text-white" : "text-secondary"
               } cursor-pointer text-[18px] font-medium hover:text-white
               `}
-              onClick={() => setActive(link.title)}
+              onClick={() => {
+                setActive(link.title);
+              }}
             >
               <a href={`#${link.id}`}>{link.title}</a>
             </li>
@@ -83,6 +83,7 @@ const Navbar = () => {
                   onClick={() => {
                     setToggle(!toggle);
                     setActive(link.title);
+                    console.log("Active item:", link.title);
                   }}
                 >
                   <a href={`#${link.id}`}>{link.title}</a>

@@ -18,10 +18,13 @@ const FeedbackCard = ({
     variants={fadeIn("", "spring", index * 0.5, 0.75)}
     className="w-full rounded-3xl bg-black-200 p-10 xs:w-[320px]"
   >
-    <p className="text-[48px] font-black leading-none text-white">"</p>
-
-    <p className="text-[18px] tracking-wider text-white">{testimonial}</p>
-    <p className="text-right text-[48px] font-black text-white">"</p>
+    <p className="text-xl font-medium italic leading-none text-white">
+      "
+      <span className="mx-2 text-[18px] not-italic tracking-wide text-white">
+        {testimonial}
+      </span>
+      "
+    </p>
     <div className="mt-7 flex items-center justify-between gap-1">
       <div className="flex flex-1 flex-col">
         <p className="font-medium text-[16-px] text-white">
@@ -45,9 +48,9 @@ const FeedbackCard = ({
 const Feedbacks = () => {
   return (
     <>
-      <div className={`mt-12 rounded-[20px] bg-black-100`}>
+      <div className={`mt-12 rounded-[20px]`}>
         <div
-          className={`bg-tertiary ${styles.padding} min-h-[300px] rounded-2xl`}
+          className={`bg-tertiary ${styles.padding} min-h-[200px] rounded-2xl xs:min-h-[225px] sm:min-h-[275px] md:min-h-[300px]`}
         >
           <motion.div variants={textVariant()}>
             <p className={styles.sectionSubText}>Colleagues have said</p>

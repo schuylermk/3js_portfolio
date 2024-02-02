@@ -1,27 +1,27 @@
 import {
-  mobile,
-  backend,
   creator,
-  web,
+  webdev,
   javascript,
+  angulardev,
   angular,
   typescript,
   html,
   css,
+  reactdev,
   reactjs,
   tailwind,
   nodejs,
   mongodb,
   git,
   sketch,
-  docker,
+  etc,
   meta,
   bluevolt,
   philips,
   jams,
   omni,
-  carrent,
-  jobit,
+  portfolio,
+  evogym,
   tripguide,
   threejs,
 } from "../assets";
@@ -44,19 +44,23 @@ export const navLinks = [
 const services = [
   {
     title: "Web Developer",
-    icon: web,
+    icon: webdev,
   },
   {
-    title: "React Native Developer",
-    icon: mobile,
+    title: "Angular Developer",
+    icon: angulardev,
   },
   {
-    title: "Backend Developer",
-    icon: backend,
+    title: "React Developer",
+    icon: reactdev,
   },
   {
-    title: "Content Creator",
+    title: "Content Creator & Manager",
     icon: creator,
+  },
+  {
+    title: "Collab & Communicator",
+    icon: etc,
   },
 ];
 
@@ -119,8 +123,8 @@ const experiences = [
     iconBg: "#383E56",
     date: "September 2020 - March 2023",
     points: [
-      "Leveraged Angular 9, 10, and 11, TypeScript, material design, NgRx (RxJS/redux) to create new components revamping existing ~20 year old SaaS learning management system. A modernization that majorly improved user experience resulting in higher customer contract renewals and led to attracting dozens of new contracts each month.",
-      "Engineered net-new Angular single-page application modules and features, including an 'Automation Suite' that drastically streamlined university admin tasks, and the 'Sharing Center’ – an environment where customers were now equipped to make connections with one another, and share educational content and resources, etc., thus reducing costs, and expediting education, licensing, and certification of their students.",
+      "Leveraged TypeScript, Angular (+ Material Design), and NgRx to revamp existing ~20 year old SaaS learning management system. This modernization majorly improved user experience resulting in higher customer contract renewals and led to attracting dozens of new contracts each month.",
+      "Engineered net-new Angular single-page app modules / features, including: 'Automation Suite' enabling university admins to conditionally 'program' a number of previously uber-repetetive tasks; 'Sharing Center’ – platform where universities were now equipped to make connections with one another, choose to share educational content, resources, etc. thus reducing costs and increasing productivity, and expediting their students path to education, licensing, and certification.",
       "Represented Engineering team on the company-wide ‘Product Council’.",
       "Collaborated with Product and Customer Service teams for clarity in performing bug fixes, functionality enhancements, copy edits, etc. to the existing C#/.NET legacy code",
       "Set up Python/FastAPI endpoints linking existing platform and new NoSQL Couchbase and Apache Kafka which improved data-synchronization and event-driven responsiveness.",
@@ -205,37 +209,41 @@ const testimonials = [
 
 const projects = [
   {
-    name: "Car Rent",
+    name: "This Here Website",
     description:
-      "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
+      "This, my personal website. Built using React, Three.js, Tailwind CSS, Framer Motion and hosted on Vercel. There's kind a lot going on here, so feel free to ask me about anything.",
     tags: [
       {
         name: "react",
-        color: "blue-text-gradient",
+        color: "text-[#087ea4]",
       },
       {
-        name: "mongodb",
-        color: "green-text-gradient",
+        name: "framer-motion",
+        color: "framerblue-text-gradient",
       },
       {
-        name: "tailwind",
+        name: "threejs",
+        color: "green-purple-text-gradient",
+      },
+      {
+        name: "tailwindcss",
         color: "pink-text-gradient",
       },
     ],
-    image: carrent,
-    source_code_link: "https://github.com/",
+    image: portfolio,
+    source_code_link: "https://github.com/schuylermk/3js_portfolio",
   },
   {
-    name: "Job IT",
+    name: "EvoGym",
     description:
-      "Web application that enables users to search for job openings, view estimated salary ranges for positions, and locate available jobs based on their current location.",
+      "Sample fitness center website built in React and TypeScript, Next.js, and Tailwind. Desktop and mobile-friendly.",
     tags: [
       {
         name: "react",
         color: "blue-text-gradient",
       },
       {
-        name: "restapi",
+        name: "Next.js",
         color: "green-text-gradient",
       },
       {
@@ -243,8 +251,8 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: jobit,
-    source_code_link: "https://github.com/",
+    image: evogym,
+    source_code_link: "https://github.com/schuylermk/gym-typescript/",
   },
   {
     name: "Trip Guide",

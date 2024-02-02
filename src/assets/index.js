@@ -1,15 +1,16 @@
-import logo from "./logo-no-background.svg";
-import backend from "./backend.png";
-import creator from "./creator.png";
+import logo from "./logo-no-border.svg";
+import webdev from "./development.png";
+import creator from "./web.png";
 import mobile from "./mobile.png";
-import web from "./web.png";
+import reactdev from "./reactclip.png";
 import github from "./github.png";
+import angulardev from "./angular.png";
+import etc from "./teamwork.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
 
 import angular from "./tech/angular_gradient.png";
 import css from "./tech/css.png";
-import docker from "./tech/docker.png";
 import sketch from "./tech/sketch.png";
 import git from "./tech/git.png";
 import html from "./tech/html.png";
@@ -29,28 +30,29 @@ import philips from "./company/philipsnl.png";
 import jams from "./company/jams.png";
 import omni from "./company/omni.png";
 
-import carrent from "./carrent.png";
-import jobit from "./jobit.png";
+import portfolio from "./portfolio-landing.png";
+import evogym from "./evogym.png";
 import tripguide from "./tripguide.png";
 
 export {
   logo,
-  backend,
   creator,
   mobile,
-  web,
+  webdev,
   github,
   menu,
   close,
+  angulardev,
   angular,
   css,
-  docker,
+  etc,
   sketch,
   git,
   html,
   javascript,
   mongodb,
   nodejs,
+  reactdev,
   reactjs,
   redux,
   tailwind,
@@ -62,7 +64,7 @@ export {
   philips,
   jams,
   omni,
-  carrent,
-  jobit,
+  portfolio,
+  evogym,
   tripguide,
 };
