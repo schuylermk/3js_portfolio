@@ -14,7 +14,13 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="relative z-0 bg-primary">
-        <div className=" bg-cover bg-center bg-no-repeat">
+        <div
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(5, 8, 22, 0.85), rgba(5, 8, 22, 0.8)), url(/src/assets/Topo-Lines-4.webp)",
+          }}
+          className="bg-contain bg-bottom bg-no-repeat"
+        >
           <Navbar />
           <Hero />
         </div>
