@@ -1,14 +1,12 @@
 import logo from "./logo-no-border.svg";
 import webdev from "./development.png";
 import creator from "./web.png";
-import mobile from "./mobile.png";
 import reactdev from "./reactclip.png";
 import github from "./github.png";
 import angulardev from "./angular.png";
 import etc from "./teamwork.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
-
 import angular from "./tech/angular_gradient.png";
 import css from "./tech/css.png";
 import sketch from "./tech/sketch.png";
@@ -22,14 +20,10 @@ import redux from "./tech/redux.png";
 import tailwind from "./tech/tailwind.png";
 import typescript from "./tech/typescript.png";
 import threejs from "./tech/threejs.png";
-
-import meta from "./company/meta.png";
-import shopify from "./company/shopify.png";
 import bluevolt from "./company/bluevolt_logo.png";
 import philips from "./company/philipsnl.png";
 import jams from "./company/jams.png";
 import omni from "./company/omni.png";
-
 import portfolio from "./portfolio-landing.png";
 import evogym from "./evogym.png";
 import thesaurus from "./thesaurus.png";
@@ -37,7 +31,6 @@ import thesaurus from "./thesaurus.png";
 export {
   logo,
   creator,
-  mobile,
   webdev,
   github,
   menu,
@@ -58,8 +51,6 @@ export {
   tailwind,
   typescript,
   threejs,
-  meta,
-  shopify,
   bluevolt,
   philips,
   jams,
