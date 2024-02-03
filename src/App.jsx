@@ -17,7 +17,7 @@ const App = () => {
         <div
           style={{
             backgroundImage:
-              "linear-gradient(rgba(5, 8, 22, 0.85), rgba(5, 8, 22, 0.8)), url(/src/assets/Topo-Lines-4.webp)",
+              "linear-gradient(rgba(5, 8, 22, 0.85), rgba(5, 8, 22, 0.8)), url(/src/assets/Topo-Lines-4.webp), url(/src/assets/Topo-Lines-4.png)",
           }}
           className="bg-contain bg-bottom bg-no-repeat"
         >
