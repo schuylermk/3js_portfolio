@@ -23,7 +23,7 @@ import {
   evogym,
   thesaurus,
   threejs,
-} from "../assets";
+} from "../../public/images";
 
 export const navLinks = [
   {

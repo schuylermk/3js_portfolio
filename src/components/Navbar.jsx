@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { styles } from "../styles";
 import { navLinks } from "../constants";
-import { logo, menu, close } from "../assets";
+import { logo, menu, close } from "../../public/images";
 
 const Navbar = () => {
   const [active, setActive] = useState("");
@@ -37,7 +37,7 @@ const Navbar = () => {
               transition: { duration: 0.3334 },
             }}
           >
-            <p className="transition-duration:700ms cursor-pointer text-[18px] font-bold text-[#6A7AA0] transition delay-500 ease-in-out hover:text-beige">
+            <p className="transition-duration:700ms -ml-4 cursor-pointer text-[18px] font-bold text-[#6A7AA0] transition delay-500 ease-in-out hover:text-beige sm:m-0">
               Schuyler Klaassen
             </p>
           </motion.div>
