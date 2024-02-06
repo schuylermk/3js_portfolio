@@ -19,7 +19,9 @@ const App = () => {
       <div className="relative z-0 bg-primary">
         <div
           style={{
-            backgroundImage: `linear-gradient(rgba(5, 8, 22, 0.85), rgba(5, 8, 22, 0.8)), url(${topo}), url(${topopng})`,
+            "@media screen and (minWidth: 940px)": {
+              backgroundImage: `linear-gradient(rgba(5, 8, 22, 0.85), rgba(5, 8, 22, 0.8)), url(${topo}), url(${topopng})`,
+            },
           }}
           className="bg-contain bg-bottom bg-no-repeat"
         >
