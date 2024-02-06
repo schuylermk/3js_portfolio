@@ -173,6 +173,14 @@
   transform: translateZ(0);
 }
 
+.topo-bg {
+  @media screen and (min-width: 940px) {
+    background-image: linear-gradient(rgba(5, 8, 22, 0.85), rgba(5, 8, 22, 0.8)),
+      url("../images/Topo-Lines-4.webp");
+  }
+  background-image: linear-gradient(rgba(5, 8, 22, 0.85), rgba(5, 8, 22, 0.8));
+}
+
 @keyframes mulShdSpin {
   0%,
   100% {

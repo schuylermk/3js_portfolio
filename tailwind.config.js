@@ -23,7 +23,8 @@ module.exports = {
         xs: "450px",
       },
       backgroundImage: {
-        "hero-pattern": "url('/src/assets/Topo-Lines-4.webp')",
+        "hero-pattern": "url('images/Topo-Lines-4.webp')",
+        "hero-overlay": `linear-gradient(rgba(5, 8, 22, 0.85), rgba(5, 8, 22, 0.8))`,
       },
     },
   },

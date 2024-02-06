@@ -1,6 +1,3 @@
-import topo from "./Topo-Lines-4.webp";
-import topopng from "./Topo-Lines-4.png";
-
 import logo from "./logo-no-border.svg";
 import webdev from "./development.png";
 import creator from "./web.png";
@@ -32,8 +29,6 @@ import evogym from "./evogym.png";
 import thesaurus from "./thesaurus.png";
 
 export {
-  topo,
-  topopng,
   logo,
   creator,
   webdev,
