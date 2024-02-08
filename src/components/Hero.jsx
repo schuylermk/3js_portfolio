@@ -9,17 +9,22 @@ const Hero = () => {
       <div
         className={`absolute inset-0 top-20 mx-auto  max-w-7xl sm:top-28 ${styles.paddingX} flex flex-row items-start gap-5`}
       >
-        <div className="mt-5 flex flex-col items-center justify-center ">
-          <div className="h-5 w-5 rounded-full bg-[#915EFF]" />
+        <div
+          id="purple-pinhead"
+          className="mt-5 flex flex-col items-center justify-center "
+        >
+          <div className="h-4 w-4 rounded-full bg-[#915EFF]" />
           <div className="violet-gradient h-40 w-1 sm:h-80" />
         </div>
 
-        <div>
-          <h1 className={`${styles.heroHeadText} text-white`}>
+        <div id="welcome-text">
+          <h1 className={`${styles.heroHeadText} text-zinc-300`}>
             Hi, I'm <span className="text-[#915EFF] underline">Schuyler</span>.
           </h1>
-          <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-            I develop websites, user interfaces, 3D visuals, animations, and
+          <p
+            className={`${styles.heroSubText} mt-2 text-zinc-50 [word-spacing:5px]`}
+          >
+            I develop websites, user-interfaces, 3D-visuals, animations, and
             software applications of all purposes, shapes and sizes.
           </p>
         </div>
