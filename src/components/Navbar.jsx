@@ -37,7 +37,7 @@ const Navbar = () => {
               transition: { duration: 0.3334 },
             }}
           >
-            <p className="transition-duration:700ms -ml-4 cursor-pointer text-[18px] font-bold text-[#6A7AA0] transition delay-500 ease-in-out hover:text-beige sm:m-0">
+            <p className="transition-duration:700ms -ml-4 cursor-pointer font-bold text-[#6A7AA0] transition delay-500 ease-in-out hover:text-beige sm:m-0 sm:text-[18px]">
               Schuyler Klaassen
             </p>
           </motion.div>
