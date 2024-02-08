@@ -7,6 +7,7 @@ const Hero = () => {
   return (
     <section className={`relative mx-auto h-screen w-full`}>
       <div
+        id="welcome"
         className={`absolute inset-0 top-20 mx-auto  max-w-7xl sm:top-28 ${styles.paddingX} flex flex-row items-start gap-5`}
       >
         <div
@@ -32,22 +33,23 @@ const Hero = () => {
 
       <ComputersCanvas />
 
-      <div className="absolute bottom-32 flex w-full items-center justify-center xs:bottom-0">
-        <a href="#about">
-          <div className="flex h-[64px] w-[35px] items-start justify-center rounded-3xl border-4 border-secondary p-2 ">
-            <motion.div
-              animate={{
-                y: [0, 24, 0],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                repeatType: "loop",
-              }}
-              className="mb-1 h-3 w-3 rounded-full bg-secondary"
-            />
-          </div>
-        </a>
+      <div
+        id="scroll-y-animation"
+        className="absolute bottom-32 flex w-full items-center justify-center xs:bottom-0"
+      >
+        <div className="flex h-[64px] w-[35px] items-start justify-center rounded-3xl border-4 border-secondary p-2 ">
+          <motion.div
+            animate={{
+              y: [0, 24, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              repeatType: "loop",
+            }}
+            className="mb-1 h-3 w-3 rounded-full bg-secondary"
+          />
+        </div>
       </div>
     </section>
   );
