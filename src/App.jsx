@@ -14,7 +14,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="relative z-0 bg-primary">
-        <div className={`topo-bg bg-contain bg-bottom bg-no-repeat`}>
+        <div className="topo-bg bg-contain bg-bottom bg-no-repeat">
           <Navbar />
           <Hero />
         </div>
