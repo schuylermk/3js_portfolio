@@ -23,12 +23,12 @@ const Computers = ({ isMobile, isTablet }) => {
         scale={isMobile ? 0.35 : isTablet ? 0.45 : 0.65}
         position={
           isMobile
-            ? [-1.25, -1.25, -1.25]
+            ? [0.5, -0.5, -0.5]
             : isTablet
               ? [-0.75, -1.75, -1.25]
               : [0, -3, -1.05]
         }
-        rotation={[-0.01, -0.2, -0.1]}
+        rotation={[-0.0, 0, -0.2]}
       />
     </mesh>
   );
@@ -69,23 +69,29 @@ const ComputersCanvas = () => {
   }, []);
 
   return (
-    <Canvas
-      frameloop="demand"
-      shadows
-      camera={{ position: [20, 3, 5], fov: 25 }}
-      gl={{ preserveDrawingBuffer: true }}
-    >
-      <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls
-          enableZoom={false}
-          maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 2}
-        />
-        <Computers isMobile={isMobile} isTablet={isTablet} />
-      </Suspense>
-
-      <Preload all />
-    </Canvas>
+    <div className="absolute top-60 h-1/2 w-full border-2 border-yellow-300">
+      <Canvas
+        frameloop="demand"
+        shadows
+        camera={{ position: [20, -15, 5], fov: 10 }}
+        gl={{ preserveDrawingBuffer: true }}
+        // className="border-2 border-red-300"
+      >
+        <Suspense fallback={<CanvasLoader />}>
+          <OrbitControls
+            // autoRotate={true}
+            autoRotateSpeed={0.2}
+            enableZoom={false}
+            // minAzimuthAngle={Math.PI / 1}
+            // maxAzimuthAngle={Math.PI / 6}
+            minPolarAngle={Math.PI / 4}
+            maxPolarAngle={Math.PI / 2}
+          />
+          <Computers isMobile={isMobile} isTablet={isTablet} />
+        </Suspense>
+        <Preload all />
+      </Canvas>
+    </div>
   );
 };
 
