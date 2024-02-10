@@ -9,25 +9,22 @@ const Computers = ({ isMobile, isTablet }) => {
 
   return (
     <mesh>
+      <hemisphereLight intensity={0.15} groundColor="black" />
       <spotLight
         position={[-20, 50, 10]}
         angle={0.12}
         penumbra={1}
+        intensity={1}
         castShadow
         shadow-mapSize={1024}
       />
-      <hemisphereLight intensity={0.05} groundColor="black" />
       <pointLight />
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.35 : isTablet ? 0.45 : 0.65}
-        position={
-          isMobile
-            ? [0.5, -0.5, -0.5]
-            : isTablet
-              ? [-0.75, -1.75, -1.25]
-              : [0, -3, -1.05]
-        }
+        scale={isMobile ? 0.6 : 0.75}
+        position={isMobile ? [0, -2, -2.2] : [0, -3.25, -1.5]}
+        // rotation={[-0.01, -0.2, -0.1]}
+
         rotation={[-0.0, 0, -0.2]}
       />
     </mesh>
@@ -36,62 +33,47 @@ const Computers = ({ isMobile, isTablet }) => {
 
 const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [isTablet, setIsTablet] = useState(false);
-
   useEffect(() => {
-    const mobileMediaQuery = window.matchMedia("(max-width: 500px)");
-    const tabletMediaQuery = window.matchMedia("(max-width: 768px)");
+    // Add a listener for changes to the screen size
+    const mediaQuery = window.matchMedia("(max-width: 500px)");
 
-    setIsMobile(mobileMediaQuery.matches);
-    setIsTablet(tabletMediaQuery.matches);
+    // Set the initial value of the `isMobile` state variable
+    setIsMobile(mediaQuery.matches);
 
-    const handleMobileMediaQueryChange = (event) => {
+    // Define a callback function to handle changes to the media query
+    const handleMediaQueryChange = (event) => {
       setIsMobile(event.matches);
     };
 
-    const handleTabletMediaQueryChange = (event) => {
-      setIsTablet(event.matches);
-    };
+    // Add the callback function as a listener for changes to the media query
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
 
-    mobileMediaQuery.addEventListener("change", handleMobileMediaQueryChange);
-    tabletMediaQuery.addEventListener("change", handleTabletMediaQueryChange);
-
+    // Remove the listener when the component is unmounted
     return () => {
-      mobileMediaQuery.removeEventListener(
-        "change",
-        handleMobileMediaQueryChange,
-      );
-      tabletMediaQuery.removeEventListener(
-        "change",
-        handleTabletMediaQueryChange,
-      );
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
     };
   }, []);
 
   return (
-    <div className="absolute top-60 h-1/2 w-full border-2 border-yellow-300">
-      <Canvas
-        frameloop="demand"
-        shadows
-        camera={{ position: [20, -15, 5], fov: 10 }}
-        gl={{ preserveDrawingBuffer: true }}
-        // className="border-2 border-red-300"
-      >
-        <Suspense fallback={<CanvasLoader />}>
-          <OrbitControls
-            // autoRotate={true}
-            autoRotateSpeed={0.2}
-            enableZoom={false}
-            // minAzimuthAngle={Math.PI / 1}
-            // maxAzimuthAngle={Math.PI / 6}
-            minPolarAngle={Math.PI / 4}
-            maxPolarAngle={Math.PI / 2}
-          />
-          <Computers isMobile={isMobile} isTablet={isTablet} />
-        </Suspense>
-        <Preload all />
-      </Canvas>
-    </div>
+    <Canvas
+      frameloop="demand"
+      shadows
+      dpr={[1, 2]}
+      camera={{ position: [20, 2, 5], fov: 25 }}
+      gl={{ preserveDrawingBuffer: true }}
+    >
+      <Suspense fallback={<CanvasLoader />}>
+        <OrbitControls
+          autoRotate={true}
+          autoRotateSpeed={0.25}
+          enableZoom={false}
+          minPolarAngle={Math.PI / 4}
+          maxPolarAngle={Math.PI / 2}
+        />
+        <Computers isMobile={isMobile} />
+      </Suspense>
+      <Preload all />
+    </Canvas>
   );
 };
 

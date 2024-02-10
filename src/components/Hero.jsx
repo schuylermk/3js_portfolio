@@ -5,10 +5,10 @@ import { ComputersCanvas } from "./canvas";
 
 const Hero = () => {
   return (
-    <section className="relative mx-auto h-screen w-full">
+    <section id="hero-section" className="relative mx-auto h-screen w-full">
       <div
         id="welcome"
-        className={`absolute inset-0 top-16 mx-auto max-w-7xl sm:top-28 ${styles.paddingX} flex flex-row items-start gap-5`}
+        className={`top-30 absolute inset-0 mx-auto max-w-7xl sm:top-28 ${styles.paddingX} flex flex-row items-start gap-5`}
       >
         <div
           id="purple-pinhead"
@@ -18,7 +18,7 @@ const Hero = () => {
           <div className="violet-gradient h-40 w-1 sm:h-80" />
         </div>
 
-        <div id="welcome-text" className="-ml-[1vw]">
+        <div id="welcome-text" className="-ml-[1vw] sm:ml-0">
           <h1 className={`${styles.heroHeadText} text-zinc-300`}>
             Hi, I'm <span className="text-[#915EFF] underline">Schuyler</span>.
           </h1>
