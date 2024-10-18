@@ -1,28 +1,28 @@
 import {
-  creator,
-  webdev,
-  javascript,
-  angulardev,
   angular,
-  typescript,
-  html,
+  angulardev,
+  bluevolt,
+  creator,
   css,
+  etc,
+  evogym,
+  git,
+  html,
+  jams,
+  javascript,
+  mongodb,
+  nodejs,
+  omni,
+  philips,
+  portfolio,
   reactdev,
   reactjs,
-  tailwind,
-  nodejs,
-  mongodb,
-  git,
   sketch,
-  etc,
-  bluevolt,
-  philips,
-  jams,
-  omni,
-  portfolio,
-  evogym,
+  tailwind,
   thesaurus,
   threejs,
+  typescript,
+  webdev,
 } from "../../images";
 
 export const navLinks = [
@@ -120,7 +120,7 @@ const experiences = [
     company_name: "BlueVolt",
     icon: bluevolt,
     iconBg: "#383E56",
-    date: "September 2020 - March 2023",
+    date: "September 2020 - March 2024",
     points: [
       "Leveraged TypeScript, Angular (+ Material Design), and NgRx to revamp existing ~20 year old SaaS learning management system. This modernization majorly improved user experience resulting in higher customer contract renewals and led to attracting dozens of new contracts each month.",
       "Engineered net-new Angular single-page app modules / features, including: 'Automation Suite' enabling university admins to conditionally 'program' a number of previously uber-repetetive tasks; 'Sharing Center’ – platform where universities were now equipped to make connections with one another, choose to share educational content, resources, etc. thus reducing costs and increasing productivity, and expediting their students path to education, licensing, and certification.",
@@ -243,4 +243,4 @@ const projects = [
   },
 ];
 
-export { services, technologies, experiences, projects };
+export { experiences, projects, services, technologies };
