@@ -1,18 +1,18 @@
+import { motion } from "framer-motion";
 import React from "react";
 import Tilt from "react-parallax-tilt";
-import { motion } from "framer-motion";
 
-import { styles } from "../styles";
 import { github } from "../../images";
-import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
+import { SectionWrapper } from "../hoc";
+import { styles } from "../styles";
 import { fadeIn, textVariant } from "../utils/motion";
 
 const Works = () => {
   return (
     <>
       <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} `}>My work</p>
+        <p className={`${styles.sectionSubText} `}></p>
         <h2 className={`${styles.sectionHeadText}`}>Projects.</h2>
       </motion.div>
 

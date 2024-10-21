@@ -40,6 +40,24 @@ export const navLinks = [
   },
 ];
 
+const blogPosts = [
+  {
+    id: 1,
+    title: "Understanding React Hooks",
+    content:
+      "React Hooks are functions that let you use state and other React features without writing a class...",
+    date: "2023-01-01",
+  },
+  {
+    id: 2,
+    title: "A Guide to CSS Flexbox",
+    content:
+      "CSS Flexbox is a layout module that makes it easier to design flexible responsive layout structure...",
+    date: "2023-02-01",
+  },
+  // Add more dummy posts as needed
+];
+
 const services = [
   {
     title: "Web Developer",
@@ -243,4 +261,4 @@ const projects = [
   },
 ];
 
-export { experiences, projects, services, technologies };
+export { blogPosts, experiences, projects, services, technologies };
