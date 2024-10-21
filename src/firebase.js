@@ -2,8 +2,6 @@ import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-// Import the functions you need from the SDKs you need
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyA46GZ49CAj14PnSt8DWJ5bNg3ZMk8P_b8",
