@@ -1,6 +1,6 @@
-// Blog.jsx
 import { motion } from "framer-motion";
 import React from "react";
+import { Link } from "react-router-dom";
 import { blogPosts } from "../constants";
 import SectionWrapper from "../hoc/SectionWrapper";
 import { styles } from "../styles";
@@ -15,6 +15,12 @@ const Blog = () => {
         </p>
         <h2 className={`${styles.sectionHeadText}`}>Blog.</h2>
       </motion.div>
+
+      <Link to="/editor">
+        <button className="w-fit rounded-xl bg-violet-500 px-6 py-2 font-semibold text-white shadow-md shadow-primary outline-none">
+          Web <i>Your Own</i> &nbsp;Log &nbsp;;)
+        </button>
+      </Link>
 
       <section id="blog-section" className="mx-auto my-10 max-w-7xl">
         <div className="grid gap-6 sm:grid-cols-2">
