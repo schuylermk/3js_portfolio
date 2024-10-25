@@ -2,7 +2,8 @@ import MarkdownIt from "markdown-it";
 import React, { useState } from "react";
 import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
-import { db } from "../firebase"; // Adjust the import path as necessary
+import { db } from "../firebase"; // Ensure this path is correct
+import SectionWrapper from "../hoc/SectionWrapper"; // Ensure this path is correct
 
 const mdParser = new MarkdownIt();
 
@@ -36,9 +37,14 @@ const MarkdownEditorPage = () => {
         renderHTML={(text) => mdParser.render(text)}
         onChange={handleEditorChange}
       />
-      <button onClick={handleSave}>Save Post</button>
+      <button
+        onClick={handleSave}
+        className="mt-4 rounded bg-violet-500 px-4 py-2 text-white"
+      >
+        Save Post
+      </button>
     </div>
   );
 };
 
-export default MarkdownEditorPage;
+export default SectionWrapper(MarkdownEditorPage, "editor");
