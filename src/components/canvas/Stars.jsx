@@ -1,17 +1,30 @@
-import { useState, useRef, Suspense } from "react";
+import { PointMaterial, Points, Preload } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Points, PointMaterial, Preload } from "@react-three/drei";
-import * as random from "maath/random/dist/maath-random.esm";
+import { Suspense, useEffect, useRef, useState } from "react";
+import Worker from "./starsWorker?worker"; // Use Vite's worker import
 
 const Stars = (props) => {
   const ref = useRef();
-  const [sphere] = useState(() =>
-    random.inSphere(new Float32Array(5001), { radius: 1.2 }),
-  );
+  const [sphere, setSphere] = useState(new Float32Array(0));
+
+  useEffect(() => {
+    const worker = new Worker();
+    worker.postMessage({ numStars: 5001 });
+
+    worker.onmessage = (e) => {
+      setSphere(e.data);
+    };
+
+    return () => {
+      worker.terminate();
+    };
+  }, []);
 
   useFrame((state, delta) => {
-    ref.current.rotation.x -= delta / 50;
-    ref.current.rotation.y -= delta / 75;
+    if (ref.current) {
+      ref.current.rotation.x -= delta / 50;
+      ref.current.rotation.y -= delta / 75;
+    }
   });
 
   return (
@@ -36,7 +49,6 @@ const StarsCanvas = () => {
         <Suspense fallback={null}>
           <Stars />
         </Suspense>
-
         <Preload all />
       </Canvas>
     </div>

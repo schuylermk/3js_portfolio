@@ -1,10 +1,10 @@
+import { motion } from "framer-motion";
 import React from "react";
 import Tilt from "react-parallax-tilt";
-import { motion } from "framer-motion";
 
-import { styles } from "../styles";
 import { services } from "../constants";
 import { SectionWrapper } from "../hoc";
+import { styles } from "../styles";
 import { fadeIn, textVariant } from "../utils/motion";
 
 const ServiceCard = ({ index, title, icon }) => (
@@ -59,10 +59,11 @@ const About = () => {
         <span className="text-slate-100 [word-spacing:4px]">
           C#, .NET, SQL, Python
         </span>
-        , and other languages. I'm a quick and enthusiastic learner who loves
-        collaborating closely with clients, stakeholders, and teammates to
-        create efficient, scalable, and user-friendly solutions that solve
-        real-world problems. Let's work together!
+        , and other languages. I truly love and am thrilled by the process of
+        building efficient, scalable, user-centric software; and when that
+        happens in collaboration with other humans – teammates, stakeholders,
+        clients, etc. - all the better. Please be in touch if you think I can
+        help with your project(s)!
       </motion.p>
       <div className="mx-auto mt-20 flex max-w-4xl flex-wrap justify-center gap-10">
         {services.map((service, index) => (
