@@ -1,3 +1,4 @@
+import Modal from "react-modal";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {
   About,
@@ -11,6 +12,9 @@ import {
   Works,
 } from "./components";
 import { MarkdownEditorPage } from "./pages/";
+
+// Set the app element for react-modal for #a11y
+Modal.setAppElement("#root");
 
 const App = () => {
   return (

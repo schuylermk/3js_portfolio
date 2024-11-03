@@ -1,5 +1,6 @@
 import { addDoc, collection } from "firebase/firestore"; // Import necessary functions from Firestore
 import MarkdownIt from "markdown-it";
+import Markdown from "markdown-to-jsx";
 import React, { useState } from "react";
 import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
@@ -11,6 +12,7 @@ const mdParser = new MarkdownIt();
 const MarkdownEditorPage = () => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
+  const [savedPost, setSavedPost] = useState(null);
 
   const handleEditorChange = ({ html, text }) => {
     setContent(text);
@@ -42,6 +44,7 @@ const MarkdownEditorPage = () => {
       alert("Post saved successfully!");
       setTitle(""); // Clear the title input after saving
       setContent(""); // Clear the editor content after saving
+      setSavedPost(postData); // Set the saved post to render it
     } catch (error) {
       console.error("Error saving post:", error);
       alert("Failed to save post.");
@@ -77,6 +80,12 @@ const MarkdownEditorPage = () => {
       >
         Save Post
       </button>
+      {savedPost && (
+        <div className="mt-8">
+          <h2>{savedPost.title}</h2>
+          <Markdown>{savedPost.content}</Markdown>
+        </div>
+      )}
     </div>
   );
 };

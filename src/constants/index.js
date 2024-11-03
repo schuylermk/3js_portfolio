@@ -2,9 +2,7 @@ import {
   angular,
   angulardev,
   bluevolt,
-  creator,
   css,
-  etc,
   evogym,
   git,
   html,
@@ -70,14 +68,6 @@ const services = [
   {
     title: "React Developer",
     icon: reactdev,
-  },
-  {
-    title: "Content Creator & Manager",
-    icon: creator,
-  },
-  {
-    title: "Collab & Communicator",
-    icon: etc,
   },
 ];
 
