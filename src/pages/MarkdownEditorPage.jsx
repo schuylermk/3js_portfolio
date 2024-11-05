@@ -1,10 +1,19 @@
 import {
   MDXEditor,
+  codeBlockPlugin,
+  codeMirrorPlugin,
+  diffSourcePlugin,
+  frontmatterPlugin,
   headingsPlugin,
+  imagePlugin,
+  linkDialogPlugin,
+  linkPlugin,
   listsPlugin,
   markdownShortcutPlugin,
   quotePlugin,
+  tablePlugin,
   thematicBreakPlugin,
+  toolbarPlugin,
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
 import { addDoc, collection } from "firebase/firestore";
@@ -82,19 +91,46 @@ const MarkdownEditorPage = () => {
     }
   };
 
+  const initialMarkdown = content ?? "";
+  const trimmedMarkdown = true ? initialMarkdown.trim() : initialMarkdown;
+
   return (
     <div>
       <h1>Markdown Editor</h1>
       <ErrorBoundary>
         <MDXEditor
           plugins={[
-            headingsPlugin(),
+            toolbarPlugin(),
             listsPlugin(),
             quotePlugin(),
+            headingsPlugin({ allowedHeadingLevels: [1, 2, 3] }),
+            linkPlugin(),
+            linkDialogPlugin(),
+            imagePlugin({
+              imageAutocompleteSuggestions: [
+                "https://via.placeholder.com/150",
+                "https://via.placeholder.com/150",
+              ],
+              imageUploadHandler: async () =>
+                Promise.resolve("https://picsum.photos/200/300"),
+            }),
+            tablePlugin(),
             thematicBreakPlugin(),
+            frontmatterPlugin(),
+            codeBlockPlugin({ defaultCodeBlockLanguage: "" }),
+            codeMirrorPlugin({
+              codeBlockLanguages: {
+                js: "JavaScript",
+                css: "CSS",
+                txt: "Plain Text",
+                tsx: "TypeScript",
+                "": "Unspecified",
+              },
+            }),
+            diffSourcePlugin({ viewMode: "rich-text", diffMarkdown: "boo" }),
             markdownShortcutPlugin(),
           ]}
-          initialMarkdown={content || ""} // Ensure initialMarkdown is always defined
+          markdown={trimmedMarkdown} // Ensure initialMarkdown is always defined
           onChange={handleEditorChange}
         />
       </ErrorBoundary>
