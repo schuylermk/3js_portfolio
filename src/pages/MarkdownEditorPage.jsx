@@ -1,21 +1,52 @@
-import { addDoc, collection } from "firebase/firestore"; // Import necessary functions from Firestore
-import MarkdownIt from "markdown-it";
+import {
+  MDXEditor,
+  headingsPlugin,
+  listsPlugin,
+  markdownShortcutPlugin,
+  quotePlugin,
+  thematicBreakPlugin,
+} from "@mdxeditor/editor";
+import "@mdxeditor/editor/style.css";
+import { addDoc, collection } from "firebase/firestore";
 import Markdown from "markdown-to-jsx";
-import React, { useState } from "react";
-import MdEditor from "react-markdown-editor-lite";
-import "react-markdown-editor-lite/lib/index.css";
+import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import SectionWrapper from "../hoc/SectionWrapper";
 
-const mdParser = new MarkdownIt();
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {
+    console.error("Error caught by Error Boundary:", error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h2>Something went wrong in the Markdown Editor component.</h2>;
+    }
+
+    return this.props.children;
+  }
+}
 
 const MarkdownEditorPage = () => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [savedPost, setSavedPost] = useState(null);
 
-  const handleEditorChange = ({ html, text }) => {
-    setContent(text);
+  useEffect(() => {
+    console.log("Content changed:", content);
+  }, [content]);
+
+  const handleEditorChange = (newContent) => {
+    setContent(newContent || "");
   };
 
   const handleSave = async () => {
@@ -54,26 +85,19 @@ const MarkdownEditorPage = () => {
   return (
     <div>
       <h1>Markdown Editor</h1>
-
-      <div className="mb-4">
-        <label htmlFor="title">Title:</label>
-
-        <input
-          type="text"
-          id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="rounded border px-3 py-2"
+      <ErrorBoundary>
+        <MDXEditor
+          plugins={[
+            headingsPlugin(),
+            listsPlugin(),
+            quotePlugin(),
+            thematicBreakPlugin(),
+            markdownShortcutPlugin(),
+          ]}
+          initialMarkdown={content || ""} // Ensure initialMarkdown is always defined
+          onChange={handleEditorChange}
         />
-      </div>
-
-      <MdEditor
-        value={content}
-        style={{ height: "500px" }}
-        renderHTML={(text) => mdParser.render(text)}
-        onChange={handleEditorChange}
-      />
-
+      </ErrorBoundary>
       <button
         onClick={handleSave}
         className="mt-4 rounded bg-violet-500 px-4 py-2 text-white"
