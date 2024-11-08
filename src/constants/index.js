@@ -20,6 +20,7 @@ import {
   thesaurus,
   threejs,
   typescript,
+  wacom,
   webdev,
 } from "../../images";
 
@@ -170,6 +171,19 @@ const experiences = [
       "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
       "Implementing responsive design and ensuring cross-browser compatibility.",
       "Participating in code reviews and providing constructive feedback to other developers.",
+    ],
+  },
+  {
+    title: "Web Content Specialist",
+    company_name: "Wacom Technology",
+    icon: wacom,
+    iconBg: "#E6DEDD",
+    date: "Sep 2016 - June 2017",
+    points: [
+      "Contract position with Wacom Technology’s global web services team. Contributed to 225% increase in (JIRA) issues resolved per week; Agile methodology six-person team.",
+      "Built and maintained layout, content UI component libraries with HTML5 and CSS3 for wacom.com consumer-product websites.",
+      "Utilized CMS Sitecore for version control, staging and quality assurance, storage of visual assets, UI component libraries, and logic for routing of site’s twelve foreign language versions.",
+      "Managed E–store product inventory, pricing, shipping, and promotion codes with InsiteCommerce.",
     ],
   },
 ];
