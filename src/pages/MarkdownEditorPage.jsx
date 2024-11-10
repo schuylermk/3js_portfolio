@@ -1,19 +1,27 @@
 import {
-  MDXEditor,
-  codeBlockPlugin,
-  codeMirrorPlugin,
+  AdmonitionDirectiveDescriptor,
+  BlockTypeSelect,
+  BoldItalicUnderlineToggles,
+  CreateLink,
   diffSourcePlugin,
+  DiffSourceToggleWrapper,
+  directivesPlugin,
   frontmatterPlugin,
   headingsPlugin,
   imagePlugin,
+  InsertImage,
   linkDialogPlugin,
   linkPlugin,
   listsPlugin,
+  ListsToggle,
   markdownShortcutPlugin,
+  MDXEditor,
   quotePlugin,
+  Separator,
   tablePlugin,
   thematicBreakPlugin,
   toolbarPlugin,
+  UndoRedo,
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
 import { addDoc, collection } from "firebase/firestore";
@@ -91,47 +99,48 @@ const MarkdownEditorPage = () => {
     }
   };
 
-  const initialMarkdown = content ?? "";
-  const trimmedMarkdown = true ? initialMarkdown.trim() : initialMarkdown;
+  // const initialMarkdown = content ?? "";
+  // const trimmedMarkdown = true ? initialMarkdown.trim() : initialMarkdown;
 
   return (
     <div>
       <h1>Markdown Editor</h1>
       <ErrorBoundary>
         <MDXEditor
+          markdown={content} // Ensure initialMarkdown is always defined
+          onChange={handleEditorChange}
           plugins={[
-            toolbarPlugin(),
+            toolbarPlugin({
+              toolbarContents: () => (
+                <>
+                  <DiffSourceToggleWrapper>
+                    <UndoRedo />
+                    <BoldItalicUnderlineToggles />
+                    <ListsToggle />
+                    <Separator />
+                    <BlockTypeSelect />
+                    <CreateLink />
+                    <InsertImage />
+                    <Separator />
+                  </DiffSourceToggleWrapper>
+                </>
+              ),
+            }),
             listsPlugin(),
             quotePlugin(),
-            headingsPlugin({ allowedHeadingLevels: [1, 2, 3] }),
+            headingsPlugin(),
             linkPlugin(),
             linkDialogPlugin(),
-            imagePlugin({
-              imageAutocompleteSuggestions: [
-                "https://via.placeholder.com/150",
-                "https://via.placeholder.com/150",
-              ],
-              imageUploadHandler: async () =>
-                Promise.resolve("https://picsum.photos/200/300"),
-            }),
+            imagePlugin(),
             tablePlugin(),
             thematicBreakPlugin(),
             frontmatterPlugin(),
-            codeBlockPlugin({ defaultCodeBlockLanguage: "" }),
-            codeMirrorPlugin({
-              codeBlockLanguages: {
-                js: "JavaScript",
-                css: "CSS",
-                txt: "Plain Text",
-                tsx: "TypeScript",
-                "": "Unspecified",
-              },
+            directivesPlugin({
+              directiveDescriptors: [AdmonitionDirectiveDescriptor],
             }),
             diffSourcePlugin({ viewMode: "rich-text", diffMarkdown: "boo" }),
             markdownShortcutPlugin(),
           ]}
-          markdown={trimmedMarkdown} // Ensure initialMarkdown is always defined
-          onChange={handleEditorChange}
         />
       </ErrorBoundary>
       <button
