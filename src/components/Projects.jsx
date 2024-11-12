@@ -8,7 +8,7 @@ import { SectionWrapper } from "../hoc";
 import { styles } from "../styles";
 import { fadeIn, textVariant } from "../utils/motion";
 
-const Works = () => {
+const Projects = () => {
   return (
     <>
       <motion.div variants={textVariant()}>
@@ -99,4 +99,4 @@ const ProjectCard = ({
   );
 };
 
-export default SectionWrapper(Works, "projects");
+export default SectionWrapper(Projects, "projects");

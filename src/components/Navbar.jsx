@@ -1,14 +1,22 @@
-import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 
-import { styles } from "../styles";
+import { close, logo, menu } from "../../images";
 import { navLinks } from "../constants";
-import { logo, menu, close } from "../../images";
+import { styles } from "../styles";
 
 const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
+  const location = useLocation();
+
+  const handleSetActive = (to) => {
+    setActive(to);
+    if (location.pathname !== "/") {
+      window.history.pushState({}, "", `/#${to}`);
+    }
+  };
 
   return (
     <nav
@@ -16,11 +24,11 @@ const Navbar = () => {
     `}
     >
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between">
-        <Link
-          to="/#Contact"
+        <RouterLink
+          to="/"
           className="flex items-center gap-10"
           onClick={() => {
-            window.location.href = "#Contact";
+            setActive("");
           }}
         >
           <motion.div
@@ -41,20 +49,26 @@ const Navbar = () => {
               Schuyler Klaassen
             </p>
           </motion.div>
-        </Link>
+        </RouterLink>
         <ul className="hidden list-none flex-row gap-10 sm:flex">
-          {navLinks.map((link) => (
+          {navLinks.map((nav) => (
             <li
-              key={link.id}
+              key={nav.id}
               className={`${
-                active === link.title ? "text-white" : "text-secondary"
+                active === nav.title ? "text-white" : "text-secondary"
               } cursor-pointer text-[18px] font-medium hover:text-white
               `}
-              onClick={() => {
-                setActive(link.title);
-              }}
+              onClick={() => setActive(nav.title)}
             >
-              <a href={`#${link.id}`}>{link.title}</a>
+              {nav.id === "editor" ? (
+                <RouterLink to={`/${nav.id.toLowerCase()}`}>
+                  {nav.title}
+                </RouterLink>
+              ) : (
+                <RouterLink to={`/#${nav.id.toLowerCase()}`}>
+                  {nav.title}
+                </RouterLink>
+              )}
             </li>
           ))}
         </ul>
