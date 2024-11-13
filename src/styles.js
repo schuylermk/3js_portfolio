@@ -8,6 +8,8 @@ const styles = {
   heroSubText:
     "text-[#dfd9ff] font-normal lg:text-[30px] sm:text-[26px] xs:text-[20px] text-[16px] lg:leading-[40px]",
 
+  mdEditor: "mt-1 min-h-screen-dvh-50 rounded bg-white",
+
   sectionHeadText:
     "text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]",
   sectionSubText:

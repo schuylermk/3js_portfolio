@@ -29,6 +29,7 @@ import Markdown from "markdown-to-jsx";
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import SectionWrapper from "../hoc/SectionWrapper";
+import { styles } from "../styles";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -107,6 +108,7 @@ const MarkdownEditorPage = () => {
       <h1>Markdown Editor</h1>
       <ErrorBoundary>
         <MDXEditor
+          contentEditableClassName={`${styles.mdEditor}`}
           markdown={content} // Ensure initialMarkdown is always defined
           onChange={handleEditorChange}
           plugins={[

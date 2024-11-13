@@ -19,6 +19,11 @@ module.exports = {
       boxShadow: {
         card: "0px 35px 120px -15px #211e35",
       },
+      minHeight: {
+        "screen-dvh-50": "50dvh",
+        "screen-dvh-75": "75dvh",
+        "screen-dvh-100": "100dvh",
+      },
       screens: {
         xs: "450px",
       },
