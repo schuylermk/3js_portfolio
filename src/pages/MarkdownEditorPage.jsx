@@ -26,7 +26,8 @@ import {
 import "@mdxeditor/editor/style.css";
 import { addDoc, collection } from "firebase/firestore";
 import Markdown from "markdown-to-jsx";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import Modal from "react-modal";
 import { db } from "../firebase";
 import SectionWrapper from "../hoc/SectionWrapper";
 import { styles } from "../styles";
@@ -54,14 +55,58 @@ class ErrorBoundary extends React.Component {
   }
 }
 
+Modal.setAppElement("#root");
+
 const MarkdownEditorPage = () => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [savedPost, setSavedPost] = useState(null);
+  const [showPreview, setShowPreview] = useState(false);
+  const [isEditorFocused, setIsEditorFocused] = useState(false);
+  const editorRef = useRef(null);
+
+  const modalStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      width: "80%",
+      maxHeight: "80vh",
+      overflow: "auto",
+      backgroundColor: "#1d1836",
+      borderRadius: "8px",
+      padding: "20px",
+      border: "1px solid #2e2b52",
+    },
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.75)",
+    },
+  };
 
   useEffect(() => {
     console.log("Content changed:", content);
   }, [content]);
+
+  useEffect(() => {
+    const editorElement = editorRef.current?.querySelector(
+      '[contenteditable="true"]',
+    );
+    if (editorElement) {
+      const handleFocus = () => setIsEditorFocused(true);
+      const handleBlur = () => setIsEditorFocused(false);
+
+      editorElement.addEventListener("focus", handleFocus);
+      editorElement.addEventListener("blur", handleBlur);
+
+      return () => {
+        editorElement.removeEventListener("focus", handleFocus);
+        editorElement.removeEventListener("blur", handleBlur);
+      };
+    }
+  }, []); // Empty dependency array since we only want to set this up once
 
   const handleEditorChange = (newContent) => {
     setContent(newContent || "");
@@ -100,61 +145,184 @@ const MarkdownEditorPage = () => {
     }
   };
 
-  // const initialMarkdown = content ?? "";
-  // const trimmedMarkdown = true ? initialMarkdown.trim() : initialMarkdown;
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
 
   return (
-    <div>
-      <h1>Markdown Editor</h1>
-      <ErrorBoundary>
-        <MDXEditor
-          contentEditableClassName={`${styles.mdEditor}`}
-          markdown={content} // Ensure initialMarkdown is always defined
-          onChange={handleEditorChange}
-          plugins={[
-            toolbarPlugin({
-              toolbarContents: () => (
-                <>
-                  <DiffSourceToggleWrapper>
-                    <UndoRedo />
-                    <BoldItalicUnderlineToggles />
-                    <ListsToggle />
-                    <Separator />
-                    <BlockTypeSelect />
-                    <CreateLink />
-                    <InsertImage />
-                    <Separator />
-                  </DiffSourceToggleWrapper>
-                </>
-              ),
-            }),
-            listsPlugin(),
-            quotePlugin(),
-            headingsPlugin(),
-            linkPlugin(),
-            linkDialogPlugin(),
-            imagePlugin(),
-            tablePlugin(),
-            thematicBreakPlugin(),
-            frontmatterPlugin(),
-            directivesPlugin({
-              directiveDescriptors: [AdmonitionDirectiveDescriptor],
-            }),
-            diffSourcePlugin({ viewMode: "rich-text", diffMarkdown: "boo" }),
-            markdownShortcutPlugin(),
-          ]}
+    <div className="text-white">
+      <h1 className={`${styles.sectionHeadText} mb-8`}>Markdown Editor</h1>
+      <label className="mb-8 flex flex-col gap-2 rounded-lg p-2 font-medium text-white">
+        Blog Title
+        <input
+          type="text"
+          value={title}
+          onChange={handleTitleChange}
+          placeholder="Enter post title..."
+          className="w-full rounded bg-tertiary p-4 text-white outline-none focus:ring-2 focus:ring-violet-500"
         />
+      </label>
+      <ErrorBoundary>
+        <label className="flex flex-col gap-2 font-medium text-white">
+          Blog Content
+          <div
+            ref={editorRef}
+            className="rounded-lg bg-tertiary p-2 focus-within:ring-2 focus-within:ring-violet-500"
+          >
+            <MDXEditor
+              contentEditableClassName={`
+                ${styles.mdEditor}
+                ${styles.mdEditorTypography}
+                ${styles.mdEditorUI}
+                ${styles.mdEditorSpacing}
+              `}
+              markdown={content}
+              onChange={handleEditorChange}
+              placeholder={
+                !isEditorFocused && !content ? "Start writing your post..." : ""
+              }
+              plugins={[
+                toolbarPlugin({
+                  toolbarContents: () => (
+                    <>
+                      <DiffSourceToggleWrapper>
+                        <UndoRedo />
+                        <BoldItalicUnderlineToggles />
+                        <ListsToggle />
+                        <Separator />
+                        <BlockTypeSelect />
+                        <CreateLink />
+                        <InsertImage />
+                        <Separator />
+                      </DiffSourceToggleWrapper>
+                    </>
+                  ),
+                }),
+                headingsPlugin(),
+                listsPlugin(),
+                quotePlugin(),
+                linkPlugin(),
+                linkDialogPlugin(),
+                imagePlugin(),
+                tablePlugin(),
+                thematicBreakPlugin(),
+                frontmatterPlugin(),
+                directivesPlugin({
+                  directiveDescriptors: [AdmonitionDirectiveDescriptor],
+                }),
+                diffSourcePlugin({
+                  viewMode: "rich-text",
+                  diffMarkdown: "boo",
+                }),
+                markdownShortcutPlugin(),
+              ]}
+            />
+          </div>
+        </label>
       </ErrorBoundary>
-      <button
-        onClick={handleSave}
-        className="mt-4 rounded bg-violet-500 px-4 py-2 text-white"
+      <div className="mt-4 flex gap-4">
+        <button
+          onClick={handleSave}
+          className="rounded bg-violet-500 px-4 py-2 text-white"
+        >
+          Save Post
+        </button>
+        <button
+          onClick={() => setShowPreview(true)}
+          className="rounded bg-blue-500 px-4 py-2 text-white"
+        >
+          Preview Post
+        </button>
+      </div>
+
+      <Modal
+        isOpen={showPreview}
+        onRequestClose={() => setShowPreview(false)}
+        style={modalStyles}
+        contentLabel="Preview Post"
       >
-        Save Post
-      </button>
+        <div className="flex flex-col text-white">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-2xl font-bold">Preview</h2>
+            <button
+              onClick={() => setShowPreview(false)}
+              className="rounded bg-violet-500 px-4 py-2 text-white transition-colors hover:bg-violet-600"
+            >
+              Close
+            </button>
+          </div>
+          <div className="prose prose-invert max-w-none">
+            <Markdown
+              options={{
+                overrides: {
+                  h1: {
+                    props: {
+                      className: "text-3xl font-bold mb-4 text-white",
+                    },
+                  },
+                  h2: {
+                    props: {
+                      className: "text-2xl font-bold mb-3 text-white",
+                    },
+                  },
+                  p: {
+                    props: {
+                      className: "mb-4 text-gray-200",
+                    },
+                  },
+                  a: {
+                    props: {
+                      className: "text-violet-400 hover:text-violet-300",
+                    },
+                  },
+                  ul: {
+                    props: {
+                      className: "list-disc pl-5 mb-4 text-gray-200",
+                    },
+                  },
+                  ol: {
+                    props: {
+                      className: "list-decimal pl-5 mb-4 text-gray-200",
+                    },
+                  },
+                  code: {
+                    props: {
+                      className: "bg-gray-800 rounded px-1 text-gray-200",
+                    },
+                  },
+                  pre: {
+                    props: {
+                      className: "bg-gray-800 rounded p-4 mb-4 overflow-x-auto",
+                    },
+                  },
+                },
+              }}
+            >
+              {content}
+            </Markdown>
+          </div>
+        </div>
+      </Modal>
+
       {savedPost && (
-        <div className="mt-8">
-          <h2>{savedPost.title}</h2>
-          <Markdown>{savedPost.content}</Markdown>
+        <div className="mt-8 rounded bg-tertiary p-6">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-2xl font-bold text-white">{savedPost.title}</h2>
+            <span className="text-sm text-secondary">
+              {formatDate(savedPost.date)}
+            </span>
+          </div>
+          <div className="prose prose-invert max-w-none">
+            <Markdown>{savedPost.content}</Markdown>
+          </div>
         </div>
       )}
     </div>

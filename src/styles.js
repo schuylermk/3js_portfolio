@@ -8,7 +8,11 @@ const styles = {
   heroSubText:
     "text-[#dfd9ff] font-normal lg:text-[30px] sm:text-[26px] xs:text-[20px] text-[16px] lg:leading-[40px]",
 
-  mdEditor: "mt-1 min-h-screen-dvh-50 rounded bg-white",
+  // Markdown Editor styles
+  mdEditor: "w-full min-h-[calc(50vh-2rem)]", // Layout & sizing
+  mdEditorTypography: "prose prose-invert max-w-none", // Typography
+  mdEditorUI: "p-4 text-white", // Basic UI styles without focus ring
+  mdEditorSpacing: "mt-4", // Spacing/margins
 
   sectionHeadText:
     "text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]",
