@@ -63,7 +63,24 @@ const MarkdownEditorPage = () => {
   const [savedPost, setSavedPost] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
   const [isEditorFocused, setIsEditorFocused] = useState(false);
+  const [isEditorReady, setIsEditorReady] = useState(false);
   const editorRef = useRef(null);
+  const mdxEditorRef = useRef(null); // Add new ref for MDXEditor
+
+  const CustomToolbarWrapper = ({ children }) => (
+    <div
+      onClick={(e) => {
+        // Only allow toolbar clicks if they're intentional (not from editor focus)
+        if (!e.isTrusted || e.target.closest('[role="button"]') !== e.target) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }}
+      className="flex items-center gap-2"
+    >
+      {children}
+    </div>
+  );
 
   const modalStyles = {
     content: {
@@ -86,30 +103,28 @@ const MarkdownEditorPage = () => {
     },
   };
 
+  const handleTitleFocus = () => {
+    console.log("Title input focused");
+  };
+
+  const handleTitleBlur = () => {
+    console.log("Title input blurred");
+  };
+
   useEffect(() => {
     console.log("Content changed:", content);
   }, [content]);
 
   useEffect(() => {
-    const editorElement = editorRef.current?.querySelector(
-      '[contenteditable="true"]',
-    );
-    if (editorElement) {
-      const handleFocus = () => setIsEditorFocused(true);
-      const handleBlur = () => setIsEditorFocused(false);
-
-      editorElement.addEventListener("focus", handleFocus);
-      editorElement.addEventListener("blur", handleBlur);
-
-      return () => {
-        editorElement.removeEventListener("focus", handleFocus);
-        editorElement.removeEventListener("blur", handleBlur);
-      };
-    }
-  }, []); // Empty dependency array since we only want to set this up once
+    const timer = setTimeout(() => {
+      setIsEditorReady(true);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleEditorChange = (newContent) => {
     setContent(newContent || "");
+    console.log("Content changed:", newContent); // Add logging for content changes
   };
 
   const handleSave = async () => {
@@ -166,67 +181,71 @@ const MarkdownEditorPage = () => {
           type="text"
           value={title}
           onChange={handleTitleChange}
+          onFocus={handleTitleFocus}
+          onBlur={handleTitleBlur}
           placeholder="Enter post title..."
           className="w-full rounded bg-tertiary p-4 text-white outline-none focus:ring-2 focus:ring-violet-500"
         />
       </label>
       <ErrorBoundary>
-        <label className="flex flex-col gap-2 font-medium text-white">
+        <div className="flex flex-col gap-2 font-medium text-white">
           Blog Content
-          <div
-            ref={editorRef}
-            className="rounded-lg bg-tertiary p-2 focus-within:ring-2 focus-within:ring-violet-500"
-          >
-            <MDXEditor
-              contentEditableClassName={`
-                ${styles.mdEditor}
-                ${styles.mdEditorTypography}
-                ${styles.mdEditorUI}
-                ${styles.mdEditorSpacing}
-              `}
-              markdown={content}
-              onChange={handleEditorChange}
-              placeholder={
-                !isEditorFocused && !content ? "Start writing your post..." : ""
-              }
-              plugins={[
-                toolbarPlugin({
-                  toolbarContents: () => (
-                    <>
-                      <DiffSourceToggleWrapper>
-                        <UndoRedo />
-                        <BoldItalicUnderlineToggles />
-                        <ListsToggle />
-                        <Separator />
-                        <BlockTypeSelect />
-                        <CreateLink />
-                        <InsertImage />
-                        <Separator />
-                      </DiffSourceToggleWrapper>
-                    </>
-                  ),
-                }),
-                headingsPlugin(),
-                listsPlugin(),
-                quotePlugin(),
-                linkPlugin(),
-                linkDialogPlugin(),
-                imagePlugin(),
-                tablePlugin(),
-                thematicBreakPlugin(),
-                frontmatterPlugin(),
-                directivesPlugin({
-                  directiveDescriptors: [AdmonitionDirectiveDescriptor],
-                }),
-                diffSourcePlugin({
-                  viewMode: "rich-text",
-                  diffMarkdown: "boo",
-                }),
-                markdownShortcutPlugin(),
-              ]}
-            />
+          <div className="rounded-lg bg-tertiary p-2 focus-within:ring-2 focus-within:ring-violet-500">
+            {isEditorReady && (
+              <MDXEditor
+                ref={mdxEditorRef}
+                placeholder={
+                  !isEditorFocused ? "Start writing your post..." : ""
+                }
+                autoFocus={false}
+                contentEditableClassName={`
+                  ${styles.mdEditor}
+                  ${styles.mdEditorTypography}
+                  ${styles.mdEditorUI}
+                  ${styles.mdEditorSpacing}
+                `}
+                markdown={content}
+                onChange={handleEditorChange}
+                plugins={[
+                  toolbarPlugin({
+                    toolbarContents: () => (
+                      <>
+                        <DiffSourceToggleWrapper>
+                          <UndoRedo />
+                          <Separator />
+                          <BlockTypeSelect />
+                          <BoldItalicUnderlineToggles />
+                          <ListsToggle />
+                          <Separator />
+                          <CreateLink />
+                          <InsertImage />
+                          <Separator />
+                        </DiffSourceToggleWrapper>
+                      </>
+                    ),
+                  }),
+                  headingsPlugin(),
+                  listsPlugin(),
+                  quotePlugin(),
+                  linkPlugin(),
+                  linkDialogPlugin(),
+                  imagePlugin(),
+                  tablePlugin(),
+                  thematicBreakPlugin(),
+                  frontmatterPlugin(),
+                  directivesPlugin({
+                    directiveDescriptors: [AdmonitionDirectiveDescriptor],
+                  }),
+                  diffSourcePlugin({
+                    viewMode: "rich-text",
+                    diffMarkdown: "boo",
+                  }),
+                  markdownShortcutPlugin(),
+                ]}
+              />
+            )}
           </div>
-        </label>
+        </div>
       </ErrorBoundary>
       <div className="mt-4 flex gap-4">
         <button
